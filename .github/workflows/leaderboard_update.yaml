@@ -1,0 +1,65 @@
+name: Leaderboard Update
+on:
+  workflow_dispatch:
+    inputs:
+      use-sample:
+        type: boolean
+        required: false
+        description: If set, display leaderboard with sample data
+jobs:
+  update_leaderboard:
+    runs-on: ubuntu-latest
+    environment: onboarding
+    name: Update the Leaderboard
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Pull Leaderboard data
+        id: get-leaderboard-data
+        env:
+          ITBENCH_API: ${{vars.ITBENCH_API}}
+          ITBENCH_API_TOKEN: ${{ secrets.ITBENCH_API_TOKEN }}
+          USE_SAMPLE: ${{ github.event.inputs.use-sample }}
+        run: |
+          echo "Requesting Leaderboard data from API"
+
+          if [ "$USE_SAMPLE" == "true" ]; then
+            python ./.github/workflows/leaderboard.py global --sample >> leaderboard_raw.md
+          else
+            python ./.github/workflows/leaderboard.py global >> leaderboard_raw.md
+          fi
+         
+      - name: generate-readme
+        id: generate-readme
+        env:
+          CONTENT: |
+            # IT Bench Leaderboard
+
+            ${{steps.get-leaderboard-data.outputs.leaderboard_md}}
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
+          dt=$(date '+%d/%m/%Y %H:%M:%S');
+
+          echo "# IT Bench leaderboard" > LEADERBOARD.md
+          echo -e "\n\nUpdated on: $dt \n\n" >> LEADERBOARD.md
+          cat leaderboard_raw.md >> LEADERBOARD.md
+          rm leaderboard_raw.md
+         
+
+          git checkout main
+
+          git add LEADERBOARD.md
+
+          git commit -m "Update leaderboard"
+
+          git push origin main
+
+
+          
+
+
+
+      
+      
