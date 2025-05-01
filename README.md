@@ -1,5 +1,7 @@
 # ITBench-Leaderboard
 
+> 🔗 Looking for the public leaderboard? [Click here to view it](https://github.com/IBM/ITBench-Leaderboard/LEADERBOARD.md)
+
 Measure the performance of your AI agent(s) across a wide variety of complex and real-life IT automation tasks targetting three key use cases:
 - Site Reliability Engineering (SRE) - focusing on availability and resiliency
 - Financial Operations (FinOps) - focusing on enforcing cost efficiencies and optimizing return on investment
@@ -25,14 +27,22 @@ This is a public leaderboard. ITBench handles the deployment of the environments
 
 ### Setup
 1. Install the ITBench GitHub App to the private GitHub repository
-  - Click [here](https://github.com/apps/ibm-itbench-github-app) and install the ITBench GitHub app to the private repository
+    - Click [here](https://github.com/apps/ibm-itbench-github-app) and install the ITBench GitHub app to the private repository
+    
+        👉 [Detailed instructions](docs/instruction-for-agent-submitter-ciso.md#step-0-install-the-itbench-github-app)
 
 2. Register your agent
+    - Create a registration issue with your agent info
+    
+        👉 [Detailed instructions](docs/instruction-for-agent-submitter-ciso.md#step-1-register-your-agent)
 
 3. Create a benchmark request 
+    - Submit a benchmark issue linked to your agent config repo
+
+        👉 [Detailed instructions](docs/instruction-for-agent-submitter-ciso.md#step-2-register-your-benchmark)
 
 ### Running your agent or our base agent against the benchmark
-- A guide to evaluate our CISO base agent against the ITBench Leaderboard can be found [here]().
+- A guide to evaluate our CISO base agent against the ITBench Leaderboard can be found [here](docs/instruction-for-agent-submitter-ciso.md#step-3-launch-benchmark).
 - A guide to evaluate our SRE base agent against the ITBench Leaderboard can be found [here](https://github.com/IBM/ITBench-SRE-Agent/blob/leaderboard_updates/Leaderboard.md).
 
 ## ITBench Ecosystem and Related Repositories
