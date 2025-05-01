@@ -23,7 +23,7 @@ This is a public leaderboard. ITBench handles the deployment of the environments
   - Do not use a production cluster as the benchmark process will create and delete resources dynamically.
   - Please refer to [prepare-kubeconfig-kind.md](https://github.com/IBM/ITBench-Scenarios/blob/main/ciso/prepare-kubeconfig-kind.md)
 - **An agent to benchmark**
-  - A base agent is available from IBM for immediate use. The base agent for the CISO use-case can be found [here]() and one for SRE and FinOps use cases can be found [here]. This allows you to leverage your methodologies / improvements without having to worry about the agent and leaderboard setvice interactions
+  - A base agent is available from IBM for immediate use. The base agent for the CISO use-case can be found [here](https://github.com/IBM/itbench-ciso-caa-agent) and one for SRE and FinOps use cases can be found [here]. This allows you to leverage your methodologies / improvements without having to worry about the agent and leaderboard setvice interactions
 
 ### Setup
 1. Install the ITBench GitHub App to the private GitHub repository
