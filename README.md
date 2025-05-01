@@ -1,6 +1,10 @@
 # ITBench-Leaderboard
 
-> 🔗 Looking for the public leaderboard? [Click here to view it](https://github.com/IBM/ITBench-Leaderboard/LEADERBOARD.md)
+Explore the latest benchmark results across all key domains:
+
+- 🔗 **[Overall Leaderboard](https://github.com/IBM/ITBench-Leaderboard/blob/leaderboard/LEADERBOARD.md)**
+- 🔐 **[CISO Leaderboard](https://github.com/IBM/ITBench-Leaderboard/blob/leaderboard/LEADERBOARD_CISO.md)**
+- ⚙️ **[SRE Leaderboard](https://github.com/IBM/ITBench-Leaderboard/blob/leaderboard/LEADERBOARD_SRE.md)**
 
 Measure the performance of your AI agent(s) across a wide variety of complex and real-life IT automation tasks targetting three key use cases:
 - Site Reliability Engineering (SRE) - focusing on availability and resiliency
