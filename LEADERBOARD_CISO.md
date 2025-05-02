@@ -12,6 +12,7 @@ For details on how to participate or interpret results, see the [README](../main
 
 Updated on: 02/05/2025 18:06:54
 
+---
 
 | Agent (Name) | Agent Submitter | Organization | Scenario Category | Score ⬆️ | Number of passed | Mean Processing Time (sec) | Date (UTC) | Issue Link |
 |--------------|-----------------|--------------|-------------------|----------|------------------|----------------------------|------------|------------|
