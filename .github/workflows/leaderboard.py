@@ -131,13 +131,11 @@ def build_ciso_table(leaderboard) -> str:
         "id": "Benchmark (ID)",
         "github_username_link": "Agent Submitter",
         "github_username_org": "Organization",
-        "name_decorated": "Benchmark (Name)",
-        "agent": "Agent (Name)",
+        "agent": "Agent Name",
         "incident_type": "Scenario Category",
         "score": "Score ⬆️",
-        "resolved": "% Resolved",
-        "mttr": "Mean Processing Time (sec)",
-        "num_of_passed": "Number of passed",
+        "mttr": "Mean Agent Execution Duration",
+        "num_of_passed": "#Passed",
         "issue_link": "Issue Link",
         "date": "Date (UTC)",
     }
@@ -152,12 +150,13 @@ For details on how to participate or interpret results, see the [README](../main
 
 **Column Descriptions:**
 - *Score*: Average benchmark score across scenarios (1.0 = perfect)
-- *Number of passed*: Number of scenarios successfully passed
-- *Mean Processing Time (sec)*: Average time taken across scenarios
+- *#Passed*: Number of scenarios successfully passed
+- *Mean Agent Execution Duration*: Average time taken across scenarios
 - *Scenario Category*: Categories of evaluated tasks (e.g., RHEL, Kyverno, etc.)
 """
     texts.append(header)
     texts.append(f"\n\nUpdated on: {get_timestamp()}\n\n")
+    texts.append("---")
     texts.append("| " + " | ".join(headers) + " |")
     texts.append("|" + "|".join(["-" * (len(h) + 2) for h in headers]) + "|")
 
@@ -215,7 +214,18 @@ def build_sre_table(leaderboard) -> str:
 
     texts = []
     texts.append("## 📊 IT Bench Leaderboard (SRE)")
+    texts.append(header)
+    header = f"""\
+This leaderboard shows the performance of agents on SRE-related IT automation scenarios.  
+For details on how to participate or interpret results, see the [README](../main/README.md).
+
+**Column Descriptions:**
+- *Diagnosis - NTAM Fault Localization*: Normalized Topology Aware Metric (NTAM) Average Fault Propagation Chain
+- *Diagnosis - NTAM Fault Propagation*: NTAM Average Fault Localisation
+- *% Resolved*: Percentage of incidents repaired (mitigation efficiency)
+"""
     texts.append(f"\n\nUpdated on: {get_timestamp()}\n\n")
+    texts.append("---")
     texts.append("| " + " | ".join(headers) + " |")
     texts.append("|" + "|".join(["-" * (len(h) + 2) for h in headers]) + "|")
 
