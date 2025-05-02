@@ -76,7 +76,7 @@ jobs:
 
           git checkout -b leaderboard
 
-          git add LEADERBOARD.md LEADERBOARD_CISO.md LEADERBOARD_SRE.md
+          git add LEADERBOARD_CISO.md LEADERBOARD_SRE.md
 
           git commit -m "chore: update leaderboard data"
 

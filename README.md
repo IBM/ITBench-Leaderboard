@@ -4,7 +4,6 @@
 
 | Domain | Leaderboard |
 |--------|-------------|
-| 🌐 **Overall** | 👉 [View Overall Leaderboard](../leaderboard/LEADERBOARD.md) |
 | 🔐 **CISO**    | 👉 [View CISO Leaderboard](../leaderboard/LEADERBOARD_CISO.md) |
 | ⚙️ **SRE**     | 👉 [View SRE Leaderboard](../leaderboard/LEADERBOARD_SRE.md) |
 
