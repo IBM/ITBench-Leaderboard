@@ -1,8 +1,16 @@
 ## 📊 IT Bench Leaderboard (SRE) - Single Trial
 
+This leaderboard shows the performance of agents on SRE-related IT automation scenarios.  
+For details on how to participate or interpret results, see the [README](../main/README.md).
+
+**Column Descriptions:**
+- *Diagnosis - NTAM Fault Localization*: Normalized Topology Aware Metric (NTAM) Average Fault Propagation Chain
+- *Diagnosis - NTAM Fault Propagation*: NTAM Average Fault Localisation
+- *% Resolved*: Percentage of incidents repaired (mitigation efficiency)
 
 Updated on: 02/05/2025 18:06:54
 
+---
 
 | Agent (Name) | Agent Submitter | Organization | Scenario Category | Trials across incidents | Diagnosis - NTAM Fault Localization | Diagnosis - NTAM Fault Propagation | Diagnosis - Time to Diagnosis | Diagnosis - Duration agent tried for Diagnosis | Repair - Time to Repair | % Resolved | Date (UTC) | Issue Link |
 |--------------|-----------------|--------------|-------------------|-------------------------|-------------------------------------|------------------------------------|-------------------------------|------------------------------------------------|-------------------------|------------|------------|------------|
