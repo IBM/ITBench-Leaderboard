@@ -4,8 +4,8 @@
 
 | Domain | Leaderboard |
 |--------|-------------|
-| 🔐 **CISO**    | 👉 [View CISO Leaderboard](../leaderboard/LEADERBOARD_CISO.md) |
-| ⚙️ **SRE**     | 👉 [View SRE Leaderboard](../leaderboard/LEADERBOARD_SRE.md) |
+| 🔐 **CISO**    | 👉 [View CISO Leaderboard](./LEADERBOARD_CISO.md) |
+| ⚙️ **SRE**     | 👉 [View SRE Leaderboard](./LEADERBOARD_SRE.md) |
 
 ## What Is ITBench?
 
@@ -79,7 +79,7 @@ If you do not receive any response within a couple of days, please reach out to 
 #### Step 3. Create a benchmark request 
 In this step, you will register your benchmark entry.
 1. Create a new benchmark issue.
-    - Go to [Benchmark Registration Form](https://github.com/IBM/itbench-leaderboard/issues) and create a new issue.
+    - Go to [Benchmark Registration Form](https://github.com/IBM/ITBench-Leaderboard/issues) and create a new issue.
 
         <img width="494" alt="image" src="https://github.com/user-attachments/assets/e2db4557-b675-4c36-9d01-2435ec6f4dfc">
 1. Fill in the issue template. 
@@ -105,7 +105,7 @@ You can run either your own custom agent or one of our built-in agents against t
 The following guides and videos demonstrate how to run the benchmark using our built-in agents. These may also serve as helpful references when setting up your own agent:
   
 - **CISO Agent** – [Documentation](docs/how-to-launch-benchmark-ciso.md) ・ [Demo Video](https://ibm.box.com/s/ob6zajbnexkq6gan4vuwgw632j1plcip)
-- **SRE Agent** – [Documentation](https://github.com/IBM/ITBench-SRE-Agent/blob/leaderboard_updates/Leaderboard.md)
+- **SRE Agent** – [Documentation](https://github.com/IBM/ITBench-SRE-Agent/blob/main/Leaderboard.md)
 
 ## ITBench Ecosystem and Related Repositories
 
