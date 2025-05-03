@@ -74,7 +74,7 @@ In this step, you will register your agent information with ITBench.
       <img width="494" alt="agent-registration-email" src="https://github.com/user-attachments/assets/7d14c523-6861-41a2-8f9a-dd4432767546">
 
 If there are any problems with your submission, we will respond directly on the issue.
-If you do not receive any response within a couple of days, please reach out to [Contact Support](#contact-support).
+If you do not receive any response within a couple of days, please reach out to the [maintainers](#maintainers).
 
 #### Step 3. Create a benchmark request 
 In this step, you will register your benchmark entry.
@@ -97,7 +97,7 @@ In this step, you will register your benchmark entry.
         <img width="494" alt="image" src="https://github.com/user-attachments/assets/003dc939-62a7-4389-9433-53d5e72ed2f3">
 
 If there are any problems with your submission, we will respond directly on the issue.
-If you do not receive any response within a couple of days, please reach out to [Contact Support](#contact-support).
+If you do not receive any response within a couple of days, please reach out to the [maintainers](#maintainers).
 
 ### Running your agent or our base agent against the benchmark
 You can run either your own custom agent or one of our built-in agents against the ITBench benchmark.
@@ -105,12 +105,12 @@ You can run either your own custom agent or one of our built-in agents against t
 The following guides and videos demonstrate how to run the benchmark using our built-in agents. These may also serve as helpful references when setting up your own agent:
   
 - **CISO Agent** – [Documentation](docs/how-to-launch-benchmark-ciso.md) ・ [Demo Video](https://ibm.box.com/s/ob6zajbnexkq6gan4vuwgw632j1plcip)
-- **SRE Agent** – [Documentation](https://github.com/IBM/ITBench-SRE-Agent/blob/leaderboard_updates/Leaderboard.md) ・ [Demo Video](<sre-video-link>)
+- **SRE Agent** – [Documentation](https://github.com/IBM/ITBench-SRE-Agent/blob/leaderboard_updates/Leaderboard.md)
 
 ## ITBench Ecosystem and Related Repositories
 
 - [ITBench](https://github.com/IBM/ITBench): Central repository providing an overview of the ITBench ecosystem, related announcements, and publications.
-- [CAA-CISO Agent](https://github.com/IBM/ITBench-CAA-CISO-Agent): CISO (Chief Information Security Officer) agents that automate compliance assessments by generating policies from natural language, collecting evidence, integrating with GitOps workflows, and deploying policies for assessment.
+- [CISO-CAA Agent](https://github.com/IBM/ITBench-CISO-CAA-Agent): CISO (Chief Information Security Officer) agents that automate compliance assessments by generating policies from natural language, collecting evidence, integrating with GitOps workflows, and deploying policies for assessment.
 - [SRE Agent](https://github.com/IBM/ITBench-SRE-Agent): SRE (Site Reliability Engineering) agents designed to diagnose and remediate problems in Kubernetes-based environments. Leverage logs, metrics, traces, and Kubernetes states/events from the IT enviroment.
 - [ITBench Scenarios](https://github.com/IBM/ITBench-Scenarios): Environment setup and mechanism to trigger scenarios.
 - [ITBench Utilities](https://github.com/IBM/ITBench-Utilities): Collection of supporting tools and utilities for participants in the ITBench ecosystem and leaderboard challenges.
@@ -119,3 +119,4 @@ The following guides and videos demonstrate how to run the benchmark using our b
 ## Maintainers
 - Takumi Yanagawa  - [@yana1205](https://github.com/yana1205)
 - Yuji Watanabe    - [@yuji-watanabe-jp](https://github.com/yuji-watanabe-jp)
+- Rohan R. Arora   - [@rohanarora](https://github.com/rohanarora)
