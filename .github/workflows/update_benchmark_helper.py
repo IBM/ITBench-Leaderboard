@@ -262,8 +262,8 @@ class CommentCommand:
         results = benchmark_status.results
         table = []
     
-        table.append("| Scenario Name | Description | Passed | Time To Resolve | Error | Diagnosis - NTAM Fault Localization | Diagnosis - NTAM Fault Propagation | Diagnosis - Time to Diagnosis | Diagnosis - Duration agent tried for Diagnosis | Repair - Time to Repair | % Resolved | Date |")
-        table.append("|---------------|-------------|--------|-----------------|-------|-------------------------------------|-----------------------------------|------------------------------|-----------------------------------------------|------------------------|------------|------|")
+        table.append("| Scenario Name | Description | Passed | Error | Trials | Diagnosis - NTAM Fault Localization | Diagnosis - NTAM Fault Propagation | Diagnosis - Time to Diagnosis | Diagnosis - Duration agent tried for Diagnosis | Repair - Time to Repair | % Resolved | Date |")
+        table.append("|---------------|-------------|--------|-------|--------|-------------------------------------|-----------------------------------|------------------------------|-----------------------------------------------|------------------------|------------|------|")
     
         for result in results:
             spec = result["spec"]
@@ -271,12 +271,13 @@ class CommentCommand:
             description = spec["description"]
             passed = "✅" if spec["passed"] else "❌"
             errored = "Error" if spec["errored"] else "No error"
-            ttr = self.parse_ttr(spec["ttr"])
             date = spec["date"]
             
             try:
                 message_data = json.loads(spec["message"])
                 
+                trials = message_data.get("trials", "N/A")
+
                 diagnosis = message_data.get("diagnosis", {})
                 ntam_fault_localization = diagnosis.get("ntam_fault_localization", {}).get("mean", "N/A")
                 ntam_fault_propagation = diagnosis.get("ntam_fault_propagation", {}).get("mean", "N/A")
@@ -287,7 +288,6 @@ class CommentCommand:
                 time_to_repair = repair.get("time_to_repair", {}).get("mean", "N/A")
                 percent_resolved = repair.get("percent_resolved", "N/A")
                 
-                # Format values for display
                 def format_value(value):
                     if value == "N/A" or value is None:
                         return "N/A"
@@ -298,6 +298,7 @@ class CommentCommand:
                     else:
                         return str(value)
                 
+                trials_str = str(trials) if trials != "N/A" else "N/A"
                 ntam_fault_localization_str = format_value(ntam_fault_localization)
                 ntam_fault_propagation_str = format_value(ntam_fault_propagation)
                 time_to_diagnosis_str = format_value(time_to_diagnosis)
@@ -307,6 +308,7 @@ class CommentCommand:
                 
             except (json.JSONDecodeError, KeyError, TypeError) as e:
                 # If JSON parsing fails or data is missing, use N/A for all fields
+                trials_str = "N/A"
                 ntam_fault_localization_str = "N/A"
                 ntam_fault_propagation_str = "N/A"
                 time_to_diagnosis_str = "N/A"
@@ -314,7 +316,7 @@ class CommentCommand:
                 time_to_repair_str = "N/A"
                 percent_resolved_str = "N/A"
             
-            table.append(f"| {name} | {description} | {passed} | {ttr} | {errored} | {ntam_fault_localization_str} | {ntam_fault_propagation_str} | {time_to_diagnosis_str} | {duration_agent_tried_str} | {time_to_repair_str} | {percent_resolved_str} | {date} |")
+            table.append(f"| {name} | {description} | {passed} | {errored} | {trials_str} | {ntam_fault_localization_str} | {ntam_fault_propagation_str} | {time_to_diagnosis_str} | {duration_agent_tried_str} | {time_to_repair_str} | {percent_resolved_str} | {date} |")
     
         return "\n".join(table)
 
