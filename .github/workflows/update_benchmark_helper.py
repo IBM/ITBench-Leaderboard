@@ -37,6 +37,7 @@ class BenchmarkStatus:
     status: str
     error_message: Optional[str] = None
     results: List[Dict[str, Any]] = field(default_factory=list)
+    scenario_name_description_map: Optional[Dict[str, str]] = None
     status_comment_id: Optional[str] = None
 
 
@@ -136,7 +137,14 @@ class StatusCommand:
             status = benchmark.get("status", {})
             phase = status.get("phase", "Errored")
             results = bench_result.get("results", {})
-            bs = self.to_benchmark_status(upd, agent_type=agent_type, status=phase, status_comment_id=status_comment_id, results=results)
+            bs = self.to_benchmark_status(
+                upd,
+                agent_type=agent_type,
+                status=phase,
+                status_comment_id=status_comment_id,
+                results=results,
+                benchmark=benchmark,
+            )
             benchmark_statuses.append(bs)
 
         data = json.dumps([asdict(x) for x in benchmark_statuses], indent=2)
@@ -154,8 +162,17 @@ class StatusCommand:
         return res_dict, False
 
     def to_benchmark_status(
-        self, upd: UpdatedIssue, agent_type: str, status: str, status_comment_id, error_message: Optional[str] = None, results: List[Dict[str, Any]] = []
+        self,
+        upd: UpdatedIssue,
+        agent_type: str,
+        status: str,
+        status_comment_id,
+        error_message: Optional[str] = None,
+        results: List[Dict[str, Any]] = [],
+        benchmark: Optional[Dict[str, Any]] = None,
     ):
+        spec = benchmark.get("spec", {})
+        scenario_name_description_map = {x["spec"]["name"]: x["spec"]["description"] for x in spec.get("scenarios", [])}
         return BenchmarkStatus(
             number=upd.number,
             github_username=upd.github_username,
@@ -165,6 +182,7 @@ class StatusCommand:
             status=status,
             status_comment_id=status_comment_id,
             results=results,
+            scenario_name_description_map=scenario_name_description_map,
         )
 
 
@@ -198,7 +216,7 @@ class CommentCommand:
         if benchmark_status.agent_type == "CISO":
             table = self.to_table(benchmark_status)
         elif benchmark_status.agent_type == "SRE":
-            table = "TBD"
+            table = self.to_table_sre(benchmark_status)
         else:
             table = "TBD"
         timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -255,6 +273,76 @@ class CommentCommand:
             date = spec["date"]
             message_text = textwrap.shorten(spec["message"], width=50, placeholder="...")
             table.append(f"| {name} | {description} | {passed} | {ttr} | {errored} | {message_text} | {date} |")
+
+        return "\n".join(table)
+
+    def to_table_sre(self, benchmark_status: BenchmarkStatus):
+        results = benchmark_status.results
+        table = []
+
+        table.append(
+            "| Scenario Name | Description | Passed | Error | Trials | Diagnosis - NTAM Fault Localization | Diagnosis - NTAM Fault Propagation | Diagnosis - Time to Diagnosis | Diagnosis - Duration agent tried for Diagnosis | Repair - Time to Repair | % Resolved | Date |"
+        )
+        table.append(
+            "|---------------|-------------|--------|-------|--------|-------------------------------------|-----------------------------------|------------------------------|-----------------------------------------------|------------------------|------------|------|"
+        )
+
+        for result in results:
+            spec = result["spec"]
+            name = spec["name"]
+            description = spec["description"]
+            if not description or description == "":
+                description = benchmark_status.scenario_name_description_map.get(name)
+            passed = "✅" if spec["passed"] else "❌"
+            errored = "Error" if spec["errored"] else "No error"
+            date = spec["date"]
+
+            try:
+                message_data = json.loads(spec["message"])
+
+                trials = message_data.get("trials", "N/A")
+
+                diagnosis = message_data.get("diagnosis", {})
+                ntam_fault_localization = diagnosis.get("ntam_fault_localization", {}).get("mean", "N/A")
+                ntam_fault_propagation = diagnosis.get("ntam_fault_propagation", {}).get("mean", "N/A")
+                time_to_diagnosis = diagnosis.get("time_to_diagnosis", {}).get("mean", "N/A")
+                duration_agent_tried = diagnosis.get("duration_agent_tried_for_diagnosis", {}).get("mean", "N/A")
+
+                repair = message_data.get("repair", {})
+                time_to_repair = repair.get("time_to_repair", {}).get("mean", "N/A")
+                percent_resolved = repair.get("percent_resolved", "N/A")
+
+                def format_value(value):
+                    if value == "N/A" or value is None:
+                        return "N/A"
+                    elif value == float('inf') or str(value) == "Infinity":
+                        return "∞"
+                    elif isinstance(value, (int, float)):
+                        return f"{value:.2f}"
+                    else:
+                        return str(value)
+
+                trials_str = str(trials) if trials != "N/A" else "N/A"
+                ntam_fault_localization_str = format_value(ntam_fault_localization)
+                ntam_fault_propagation_str = format_value(ntam_fault_propagation)
+                time_to_diagnosis_str = format_value(time_to_diagnosis)
+                duration_agent_tried_str = format_value(duration_agent_tried)
+                time_to_repair_str = format_value(time_to_repair)
+                percent_resolved_str = format_value(percent_resolved)
+
+            except (json.JSONDecodeError, KeyError, TypeError) as e:
+                # If JSON parsing fails or data is missing, use N/A for all fields
+                trials_str = "N/A"
+                ntam_fault_localization_str = "N/A"
+                ntam_fault_propagation_str = "N/A"
+                time_to_diagnosis_str = "N/A"
+                duration_agent_tried_str = "N/A"
+                time_to_repair_str = "N/A"
+                percent_resolved_str = "N/A"
+
+            table.append(
+                f"| {name} | {description} | {passed} | {errored} | {trials_str} | {ntam_fault_localization_str} | {ntam_fault_propagation_str} | {time_to_diagnosis_str} | {duration_agent_tried_str} | {time_to_repair_str} | {percent_resolved_str} | {date} |"
+            )
 
         return "\n".join(table)
 
